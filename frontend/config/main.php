@@ -44,5 +44,10 @@ return [
             ],
         ],
     ],
+    'modules' => [
+        'cart' => [
+            'class' => 'frontend\modules\cart\Module',
+        ],
+    ],
     'params' => $params,
 ];
