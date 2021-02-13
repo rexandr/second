@@ -12,6 +12,7 @@ use common\helpers\CategoryHelper;
 
 <div class="page-form">
 
+    <?php echo Yii::$app->config->get(kdsnvsdlkfn) ?>
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'category_id')->dropDownList(CategoryHelper::getCategoryList()) ?>
