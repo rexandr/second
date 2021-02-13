@@ -8,7 +8,7 @@ return [
     'components' => [
         'config' => [
             'class' => 'common\components\Config',
-            'email' => 'syava_tarder@ukr.net',
+            'email' => 'syava_trader@ukr.net',
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',

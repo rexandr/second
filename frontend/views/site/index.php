@@ -1,5 +1,5 @@
 <?php
-
+use frontend\widgets\TestWidget;
 /* @var $this yii\web\View */
 
 $this->title = 'My Yii Application';
@@ -8,6 +8,9 @@ $this->title = 'My Yii Application';
 
     <div class="jumbotron">
         <h1>Congratulations!</h1>
+
+        <?php echo TestWidget::widget(['view' => 'test2'])?><br>
+        <?php echo TestWidget::widget(['view' => 'test'])?>
 
         <p class="lead">You have successfully created your Yii-powered application.</p>
 
