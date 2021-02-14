@@ -2,7 +2,7 @@
 namespace frontend\controllers;
 
 use yii\helpers\ArrayHelper;
-use yii\web\Controller;
+use frontend\components\Controller;
 use common\models\Category;
 
 class TestController extends Controller

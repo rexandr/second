@@ -2,7 +2,7 @@
 namespace frontend\controllers;
 
 use Yii;
-use yii\web\Controller;
+use frontend\components\Controller;
 use frontend\models\ConsultForm;
 
 class ConsultController extends Controller
