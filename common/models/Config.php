@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\db\ActiveQuery;
 
 /**
  * This is the model class for table "config".
@@ -15,6 +16,7 @@ use Yii;
  */
 class Config extends \yii\db\ActiveRecord
 {
+
     /**
      * {@inheritdoc}
      */
@@ -47,5 +49,44 @@ class Config extends \yii\db\ActiveRecord
             'label' => 'Label',
             'pos' => 'Pos',
         ];
+    }
+
+    public static function find()
+    {
+        return new ConfigQuery(get_called_class());
+    }
+
+    public function getId()
+    {
+        $this->id;
+    }
+
+    public function getKey()
+    {
+        $this->key;
+    }
+
+    public function getValue()
+    {
+        $this->value;
+    }
+
+    public function getLabel()
+    {
+        $this->label;
+    }
+
+    public function getPos()
+    {
+        $this->pos;
+    }
+}
+
+class ConfigQuery extends ActiveQuery
+{
+    public function findByKey($key)
+    {
+        $this->andWhere(['key'=>$key]);
+        return $this;
     }
 }

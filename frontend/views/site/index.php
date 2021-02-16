@@ -1,5 +1,6 @@
 <?php
 use frontend\widgets\TestWidget;
+
 /* @var $this yii\web\View */
 
 $this->title = 'My Yii Application';
@@ -8,7 +9,19 @@ $this->title = 'My Yii Application';
 
     <div class="jumbotron">
         <h1>Congratulations!</h1>
+        <?php
+        if (Yii::$app->config->has(5))
+        {
+            echo 'exist';
+        }else
+        {
+            echo 'doesn`t exist';
+        }
+        ?>
 
+        <?php echo Yii::$app->config->get(5)?><br>
+        <?php echo Yii::$app->config->get('phone')?><br>
+        <?php //echo Yii::$app->config->set('phone', '0975092926')?><br>
         <?php echo TestWidget::widget(['view' => 'test2'])?><br>
         <?php echo TestWidget::widget(['view' => 'test'])?>
 
