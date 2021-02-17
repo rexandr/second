@@ -9,6 +9,10 @@ return [
         'cart' => [
             'class' => 'common\components\Cart'
         ],
+        'person' => [
+            'class' => 'common\components\Person',
+            'nik' => 'ololol',
+        ],
         'config' => [
             'class' => 'common\components\Config',
             'email' => 'syava_trader@ukr.net',
