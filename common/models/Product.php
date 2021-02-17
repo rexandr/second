@@ -4,6 +4,7 @@ namespace common\models;
 
 use Yii;
 use yii\behaviors\TimestampBehavior;
+use yii\db\ActiveQuery;
 
 /**
  * This is the model class for table "product".
@@ -65,5 +66,19 @@ class Product extends \yii\db\ActiveRecord
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
         ];
+    }
+
+    public static function find()
+    {
+        return new ProductQuery(get_called_class());
+    }
+}
+
+class ProductQuery extends ActiveQuery
+{
+    public function findByIds($ids)
+    {
+        $this->andWhere(['in', 'id', 'ids']);
+        return $this;
     }
 }

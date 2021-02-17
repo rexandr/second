@@ -6,6 +6,9 @@ return [
     ],
     'vendorPath' => dirname(dirname(__DIR__)) . '/vendor',
     'components' => [
+        'cart' => [
+            'class' => 'common\components\Cart'
+        ],
         'config' => [
             'class' => 'common\components\Config',
             'email' => 'syava_trader@ukr.net',
