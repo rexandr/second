@@ -3,12 +3,13 @@ namespace frontend\controllers;
 
 use common\models\repositories\ProductRepository;
 use frontend\components\Controller;
+use Yii;
 
 class CartController extends Controller
 {
     public function actionIndex()
     {
-        $productsInCart = \Yii::$app->cart->products();
+        $productsInCart = Yii::$app->cart->products();
         $products = null;
         if ($productsInCart)
         {
@@ -16,13 +17,13 @@ class CartController extends Controller
             $productsRepository = new ProductRepository();
             $products = $productsRepository->getProductsByIds($productsIds);
         }
-        return $this->render('index', ['products' => $products]);
+        return $this->render('index', ['products' => $products, 'productsInCart'=> $productsInCart]);
     }
 
     public function actionAdd($id)
     {
-        \Yii::$app->cart->add($id);
-        return $this->redirect(\Yii::$app->request->referrer);
+        Yii::$app->cart->add($id);
+        return $this->redirect(Yii::$app->request->referrer);
     }
 
     public function actionDel($id)
