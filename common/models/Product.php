@@ -78,7 +78,7 @@ class ProductQuery extends ActiveQuery
 {
     public function findByIds($ids)
     {
-        $this->andWhere(['in', 'id', 'ids']);
+        $this->andWhere(['in', 'id', $ids]);
         return $this;
     }
 }

@@ -8,7 +8,7 @@ class ProductRepository
     public function getProductsByIds($ids)
     {
         return Product::find()
-            ->findByIds()
-            ->all;
+            ->findByIds($ids)
+            ->all();
     }
 }

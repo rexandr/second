@@ -18,7 +18,7 @@ class CatalogController extends Controller
               ],
           ]
         );
-        $this->view->title = 'New page';
+        //$this->view->title = 'New page';
         return $this->render('index', ['listDataProvider'=>$dataProvider]);
     }
 }

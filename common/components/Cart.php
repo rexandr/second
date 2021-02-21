@@ -37,7 +37,7 @@ class Cart extends Component
         {
             if ($productInCart[$id]>1)
             {
-                $productInCart--;
+                $productInCart[$id]--;
             }
             else
             {
@@ -85,6 +85,7 @@ class Cart extends Component
             if (array_key_exists($id, $productsInCart))
             {
                 unset($productsInCart[$id]);
+                $_SESSION['products'] = $productsInCart;
             }
         }
         return true;

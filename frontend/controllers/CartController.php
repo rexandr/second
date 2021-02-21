@@ -1,8 +1,10 @@
 <?php
 namespace frontend\controllers;
 
+use common\models\Order;
 use common\models\repositories\ProductRepository;
 use frontend\components\Controller;
+use frontend\models\form\CheckoutForm;
 use Yii;
 
 class CartController extends Controller
@@ -28,19 +30,36 @@ class CartController extends Controller
 
     public function actionDel($id)
     {
-        \Yii::$app->cart->del($id);
-        return $this->redirect(\Yii::$app->request->referrer);
+        Yii::$app->cart->del($id);
+        return $this->redirect(Yii::$app->request->referrer);
     }
 
     public function actionClear()
     {
-        \Yii::$app->cart->clear;
-        return $this->redirect(\Yii::$app->request->referrer);
+        Yii::$app->cart->clear;
+        return $this->redirect(Yii::$app->request->referrer);
     }
 
-    public function actiobDelete($id)
+    public function actionDelete($id)
     {
-        \Yii::$app->cart->delete($id);
-        return $this->redirect(\Yii::$app->request->referrer);
+        Yii::$app->cart->deleteProduct($id);
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
+    public function actionCheckout()
+    {
+        $model = new CheckoutForm();
+
+        if ($model->load(Yii::$app->request->post())) {
+//            if ($model->validate()) {
+//                // form inputs are valid, do something here
+//                return;
+//            }
+            $model->process();
+        }
+
+        return $this->render('checkout', [
+            'model' => $model,
+        ]);
     }
 }
