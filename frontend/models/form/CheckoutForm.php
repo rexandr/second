@@ -2,7 +2,8 @@
 
 namespace frontend\models\form;
 
-use common\models\repositories\CheckoutRepository;
+use common\models\Order;
+use frontend\models\repositories\CheckoutRepository;
 use common\models\repositories\ProductRepository;
 use ErrorException;
 use frontend\models\repositories\CheckoutProductRepository;
@@ -52,18 +53,19 @@ class CheckoutForm extends Model
         if (!$this->validate())
             return false;
 
-        $checoutRepository = new CheckoutRepository();
-        $orderId = $checoutRepository->save($this->getAttributes());
+        $checkoutRepository = new CheckoutRepository();
+        $orderId = $checkoutRepository->save($this->getAttributes());
         if (!$orderId)
             throw new ErrorException();
-        $checoutProductRepository = new CheckoutProductRepository();
+        $checkoutProductRepository = new CheckoutProductRepository();
         $productRepository = new ProductRepository();
         $productsInCart = Yii::$app->cart->products();
         $productsIds = array_keys($productsInCart);
         $products = $productRepository->getProductsByIds($productsIds);
+        $totalPrice = 0;
         foreach ($products as $product)
         {
-            $checoutProductRepository->save([
+            $checkoutProductRepository->save([
                 'order_id' => $orderId,
                 'product_id' => $product->id,
                 'name' => $product->name,
@@ -71,7 +73,11 @@ class CheckoutForm extends Model
                 'price' => $product->price,
                 'total_price' => $product->price * $productsInCart[$product->id]
             ]);
+            $totalPrice += $product->price * $productsInCart[$product->id];
         }
-        return 'OK';
+        $checkoutRepository->update($orderId, [
+            'total_price' => $totalPrice,
+            'status' => Order::STATUS_NEW,
+        ]);
     }
 }

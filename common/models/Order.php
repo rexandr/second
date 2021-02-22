@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\behaviors\TimestampBehavior;
 
 /**
  * This is the model class for table "order".
@@ -24,6 +25,19 @@ use Yii;
  */
 class Order extends \yii\db\ActiveRecord
 {
+
+    const STATUS_NEW = 1;
+    const STATUS_PROCESS = 2;
+    const STATUS_CLOSED = 3;
+
+    public function behaviors()
+    {
+        return array_merge(
+            parent::behaviors(),
+            [TimestampBehavior::className()]
+        );
+    }
+
     /**
      * {@inheritdoc}
      */
