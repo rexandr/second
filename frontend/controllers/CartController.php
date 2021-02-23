@@ -5,7 +5,9 @@ use common\models\Order;
 use common\models\repositories\ProductRepository;
 use frontend\components\Controller;
 use frontend\models\form\CheckoutForm;
+use frontend\models\repositories\CheckoutRepository;
 use Yii;
+use yii\web\NotFoundHttpException;
 
 class CartController extends Controller
 {
@@ -46,18 +48,26 @@ class CartController extends Controller
         return $this->redirect(Yii::$app->request->referrer);
     }
 
+    public function actionSuccess($id)
+    {
+        $checkoutRepository = new CheckoutRepository();
+        $model = $checkoutRepository->findById($id);
+        if (!$model)
+            throw  new NotFoundHttpException();
+        return $this->render('success', ['model' => $model]);
+    }
+
     public function actionCheckout()
     {
         $model = new CheckoutForm();
-
         if ($model->load(Yii::$app->request->post())) {
-//            if ($model->validate()) {
-//                // form inputs are valid, do something here
-//                return;
-//            }
-            $model->process();
+           if (($id = $model->process())!==null)
+           {
+               Yii::$app->cart->clear();
+               return $this->redirect(['cart/success', 'id'=>$id]);
+           }
+           return $this->refresh();
         }
-
         return $this->render('checkout', [
             'model' => $model,
         ]);

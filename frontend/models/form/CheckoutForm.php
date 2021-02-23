@@ -28,7 +28,7 @@ class CheckoutForm extends Model
     {
         return
         [
-          [['name', 'surname', 'phone', 'comment', 'email'], 'required'],
+          [['name', 'surname', 'phone', 'comment', 'delivery_id', 'payment_id', 'email'], 'required'],
           ['email', 'email'],
           [['name', 'surname', 'phone', 'comment'],'string'],
           [['delivery_id', 'payment_id', 'status'], 'integer'],
@@ -45,6 +45,8 @@ class CheckoutForm extends Model
             'phone' => 'Phone',
             'comment' => 'Comment',
             'email' => 'Email',
+            'delivery_id' => 'Delivery',
+            'payment_id' => 'Payment',
         ];
     }
 
@@ -79,5 +81,7 @@ class CheckoutForm extends Model
             'total_price' => $totalPrice,
             'status' => Order::STATUS_NEW,
         ]);
+
+        return $orderId;
     }
 }

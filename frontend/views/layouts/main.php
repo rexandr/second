@@ -37,7 +37,9 @@ AppAsset::register($this);
     ]);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
+        ['label' => 'BACK_PAGE', 'url' => ['/admin/page']],
         ['label' => 'Gii', 'url' => ['/gii']],
+        ['label' => 'Catalog', 'url' => ['/catalog']],
         ['label' => 'Cart'.Yii::$app->cart->count(), 'url' => ['/cart/index']],
         ['label' => 'About', 'url' => ['/site/about']],
         ['label' => 'Contact', 'url' => ['/site/contact']],

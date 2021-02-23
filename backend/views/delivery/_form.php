@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use common\helpers\StatusHelper;
 
 /* @var $this yii\web\View */
 /* @var $model common\models\Delivery */
@@ -16,7 +17,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'status')->textInput() ?>
+    <?= $form->field($model, 'status')->dropDownList(StatusHelper::getStatusLabels()) ?>
 
     <?= $form->field($model, 'pos')->textInput() ?>
 

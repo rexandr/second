@@ -3,6 +3,7 @@
 namespace common\models;
 
 use Yii;
+use yii\db\ActiveQuery;
 
 /**
  * This is the model class for table "payment".
@@ -15,6 +16,9 @@ use Yii;
  */
 class Payment extends \yii\db\ActiveRecord
 {
+
+    const STAUS_ACTIVE = 1;
+    const STAUS_DRAFT = 0;
     /**
      * {@inheritdoc}
      */
@@ -47,5 +51,24 @@ class Payment extends \yii\db\ActiveRecord
             'status' => 'Status',
             'pos' => 'Pos',
         ];
+    }
+    public static function find()
+    {
+        return new PaymentQuery(get_called_class());
+    }
+}
+
+class PaymentQuery extends ActiveQuery
+{
+    public function findByActive()
+    {
+        $this->andWhere(['status' => Payment::STAUS_ACTIVE]);
+        return $this;
+    }
+
+    public function orderByPosition()
+    {
+        $this->orderBy('pos ASC');
+        return $this;
     }
 }

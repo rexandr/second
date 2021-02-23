@@ -23,4 +23,9 @@ class CheckoutRepository
             return false;
         return $model->id;
     }
+
+    public function findById($id)
+    {
+        return Order::findOne($id);
+    }
 }
