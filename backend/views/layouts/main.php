@@ -38,6 +38,7 @@ AppAsset::register($this);
     $menuItems = [
         ['label' => 'Home', 'url' => ['/site/index']],
         ['label' => 'Gii', 'url' => ['/gii']],
+        ['label' => 'Menu', 'url' => ['/menu']],
         ['label' => 'Category', 'url' => ['/category']],
         ['label' => 'Product', 'url' => ['/product']],
         ['label' => 'Delivery', 'url' => ['/delivery']],
